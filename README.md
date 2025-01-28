@@ -1,61 +1,68 @@
 # **Modelo Preditivo para Moderação de Conteúdo: Identificação de Claims e Opiniões em Vídeos do TikTok**
 
 ### **Integrantes do Grupo**
-- **Gabriella de Lima Araujo** - 2022104786  
-- **Victoria Andrade Flores de Mello** - 2023002251  
-- **Haniel Botelho Ribeiro** - 2023028552  
+- **Gabriella de Lima Araujo**  
+- **Victoria Andrade Flores de Mello** 
+- **Haniel Botelho Ribeiro**  
 
 ---
 
 ## **Introdução**
-Este projeto tem como objetivo apoiar a moderação de conteúdo em plataformas digitais, utilizando modelos preditivos baseados em **análise de texto e aprendizado de máquina**. Analisamos um dataset de vídeos reportados do TikTok, classificando-os em duas categorias:
+Este projeto busca desenvolver soluções para moderar conteúdos em plataformas digitais, utilizando **técnicas de aprendizado de máquina e análise de texto**. O foco está em analisar transcrições de vídeos reportados no TikTok, classificando-os como:
 - **Claims** (afirmações verificáveis)
 - **Opinions** (opiniões subjetivas)
 
-Além disso, prevemos a **viralidade dos vídeos**, com foco em identificar padrões associados ao engajamento (curtidas, compartilhamentos, etc.).
+Além disso, um modelo foi projetado para prever a **viralidade dos vídeos**, identificando padrões que influenciam no engajamento do público.
 
-**Objetivos principais:**
-1. Diferenciar vídeos contendo claims e opinions para priorizar moderação de conteúdo.
-2. Prever a viralidade dos vídeos com base em suas características textuais e métricas de engajamento.
+### **Objetivos principais**
+1. Diferenciar vídeos que contêm claims de vídeos com opinions, priorizando conteúdos que demandam maior atenção na moderação.  
+2. Prever a viralidade dos vídeos com base em suas características textuais e métricas de engajamento.  
 
 ---
 
 ## **Pipeline de Desenvolvimento**
-O projeto foi dividido nas seguintes etapas:
-1. **Exploração e limpeza do dataset**
-   - Compreensão geral dos dados.
-   - Tratamento de valores ausentes e identificação de padrões iniciais.
+O projeto foi dividido em cinco etapas principais:
+
+1. **Exploração e limpeza dos dados**
+   - Identificação da estrutura do dataset e tratamento de dados ausentes.  
+   - Seleção de variáveis relevantes.  
+
 2. **Análise exploratória de dados (EDA)**
-   - Análises gráficas para entender as relações entre as variáveis.
-   - Correlações entre engajamento e tipo de conteúdo.
+   - Identificação de padrões entre as métricas de engajamento.  
+   - Análises gráficas para explorar relações entre tipo de conteúdo e popularidade.  
+
 3. **Análise textual**
-   - Criação de nuvens de palavras para **claims** e **opinions**.
-   - Extração de padrões textuais com **TF-IDF** e **Word2Vec**.
+   - Geração de nuvens de palavras e bigramas frequentes para claims e opinions.  
+   - Representação textual utilizando **TF-IDF** e **Word2Vec**.  
+
 4. **Modelagem preditiva**
-   - Classificação de claims vs. opinions usando **Random Forest**.
-   - Predição da viralidade com ensemble learning.
-5. **Avaliação e interpretação dos modelos**
-   - Métricas como **acurácia**, **F1-score**, e análise de features mais importantes.
+   - Classificação de claims vs. opinions com **Random Forest**.  
+   - Previsão de viralidade utilizando ensemble learning.  
+
+5. **Avaliação e interpretação**
+   - Análise das métricas de desempenho, como **acurácia**, **F1-score** e **matriz de confusão**.  
+   - Estudo das features mais importantes para os modelos.  
 
 ---
 
 ## **Tecnologias Utilizadas**
-- **Linguagem**: Python  
-- **Bibliotecas Principais**:  
-  - Pandas, NumPy, Matplotlib, Seaborn (manipulação e visualização de dados)  
-  - Scikit-learn (modelagem preditiva)  
-  - NLTK e WordCloud (processamento de linguagem natural)  
-  - Gensim (Word2Vec para embeddings textuais)
+- **Linguagem de Programação:** Python  
+- **Principais Bibliotecas:**
+  - Manipulação e visualização de dados: `Pandas`, `NumPy`, `Matplotlib`, `Seaborn`.  
+  - Processamento de texto: `NLTK`, `WordCloud`, `Gensim` (Word2Vec).  
+  - Modelagem preditiva: `Scikit-learn`.  
 
 ---
 
 ## **Análises Realizadas**
 ### **1. Análise Exploratória**
-Estatísticas iniciais revelaram que:
-- Vídeos do tipo **claim** possuem maior engajamento em métricas como visualizações e compartilhamentos.  
-- Contas **não verificadas** publicam mais claims, enquanto contas verificadas tendem a produzir opiniões.
+A análise inicial revelou que vídeos do tipo **claim** têm maior engajamento nas métricas de:
+- **Curtidas**, **compartilhamentos**, e **visualizações**.  
 
-**Correlação entre métricas de engajamento:**
+Além disso, **contas não verificadas** foram as principais responsáveis por publicar claims, enquanto contas verificadas produziram mais opiniões.
+
+#### **Correlação entre métricas de engajamento**
+Um heatmap destacou relações entre diferentes métricas, como curtidas e compartilhamentos.  
 <div align="center">
   <img src="img/correlation.png" alt="Heatmap de Correlação" width="600">
 </div>
@@ -63,61 +70,69 @@ Estatísticas iniciais revelaram que:
 ---
 
 ### **2. Análise Textual**
-**Nuvens de palavras para cada tipo de conteúdo:**  
-- **Claims**: Destacam palavras como "discovered", "read", "media".  
-- **Opinions**: Contêm termos subjetivos como "view", "world", "thought".
+**Nuvens de palavras para claims e opinions**:  
+Palavras como "discovered", "read" e "media" se destacam em claims, enquanto "view", "thought" e "world" são frequentes em opinions.
 
 <div align="center">
   <img src="img/wordcloud1.png" alt="Nuvem de Palavras - Claims" width="400">
-  <img src="img/opinions2.png" alt="Nuvem de Palavras - Opinions" width="400">
+  <img src="img/wordcloud2.png" alt="Nuvem de Palavras - Opinions" width="400">
 </div>
 
-**Análise de bigramas mais frequentes:**  
-Bigrams como **"media claim"** e **"friend discovered"** foram fundamentais para distinguir claims.  
+**Features TF-IDF:**  
+Palavras como "read" e "learned" e "discovered" foram essenciais para distinguir claims de opinions.  
 <div align="center">
-  <img src="img/top10bigrams.png" alt="Top 10 Bigrams Mais Frequentes" width="600">
+  <img src="img/top20.png" alt="Top 20 Features TD-IDF Mais Frequentes" width="600">
 </div>
 
 ---
 
 ### **3. Modelagem**
-**Classificação de Claims vs. Opinions**  
-O modelo **Random Forest**, utilizando representações TF-IDF e Word2Vec, alcançou:
+**Classificação de Claims vs. Opinions:**  
+O modelo **Random Forest**, utilizando as representações TF-IDF e Word2Vec, atingiu:  
 - **Acurácia**: 99.95%  
-- **F1-Score**: 1.00 (para ambas as classes)  
+- **F1-Score**: 1.00 para ambas as classes.  
 
-**Importância das features mais relevantes:**
+**Importância dos tokens com maior grau de importância atribuído pelo modelo:**
 <div align="center">
-  <img src="img/top10tokens.png" alt="Features Mais Importantes (Tokens)" width="600">
+  <img src="img/top10tokens.png" alt="Tokens Mais Importantes" width="600">
 </div>
 
-**Predição de Viralidade**  
-- O modelo ensemble baseado em bigramas apresentou **acurácia de 93%**.  
-- Tokens e bigramas como "friend learned" foram decisivos para identificar vídeos com maior potencial de viralidade.
+**Predição de Viralidade:**  
+- O modelo baseado em ensemble learning alcançou **93% de acurácia** para prever se um vídeo se tornará viral.  
+- Tokens e bigramas como **"friend learned"** mostraram-se cruciais para identificar vídeos virais.  
 
 ---
 
 ## **Resultados**
 ### **Classificação**
-- O modelo separou com eficácia vídeos contendo **claims** (afirmações verificáveis) de vídeos com **opinions** (opiniões subjetivas), alcançando quase 100% de precisão.
-- **Claims** mostraram-se mais virais que opinions, sugerindo que conteúdos factuais atraem mais engajamento.
+- O modelo separou vídeos **claims** e **opinions** com quase 100% de precisão.  
+- **Claims** mostraram-se mais virais, sugerindo que conteúdos factuais geram maior engajamento.  
 
 ### **Predição de Viralidade**
-- Analisando padrões linguísticos e métricas de engajamento, o modelo foi capaz de prever com **93% de acurácia** se um vídeo seria viral.
-
+- O modelo foi capaz de prever com **93% de acurácia** a viralidade de vídeos analisando métricas de engajamento e padrões textuais.
 
 ---
 
 ## **Contribuições Futuras**
-- Expandir o dataset com exemplos mais diversos.  
-- Explorar técnicas avançadas como transformers (BERT, GPT).  
-- Realizar análises longitudinais para entender como padrões de engajamento evoluem ao longo do tempo.
+Para evoluir o projeto, sugerimos:  
+1. **Ampliar o dataset:** Incluir exemplos mais diversos para aumentar a representatividade.  
+2. **Adotar transformers:** Implementar modelos como **BERT** ou **GPT** para capturar melhor as relações contextuais.  
+3. **Análises longitudinais:** Estudar padrões de engajamento ao longo do tempo.  
+4. **Redução de dimensionalidade:** Aplicar técnicas como PCA para lidar com a alta dimensionalidade gerada por bigramas.  
+
+---
+
+## **Impacto do Projeto**
+Este projeto contribui para a moderação de conteúdo ao:  
+- **Priorizar vídeos críticos** com maior potencial viral, otimizando recursos da moderação.  
+- **Reduzir a disseminação de desinformação**, focando em conteúdos que demandam maior atenção.  
+- **Gerar insights valiosos** sobre padrões de engajamento e viralidade para criadores e moderadores.  
 
 ---
 
 **Autores:**  
-[Victoria Andrade Flores de Mello](mailto:victoriaflores@dcc.ufmg.br) | [Gabriella de Lima Araujo](mailto:email1@example.com) | [Haniel Botelho Ribeiro](mailto:haniel.botelho@example.com)
+[Victoria Andrade Flores de Mello](mailto:victoriaflores@example.com) | [Gabriella de Lima Araujo](mailto:g.gabrielladelima@example.com) | [Haniel Botelho Ribeiro](mailto:haniel.botelho@example.com)  
 
 ---
 
-Sinta-se à vontade para sugerir melhorias ou abrir issues neste repositório! 🚀
+📢 **Contribuições são bem-vindas!** Sinta-se à vontade para abrir issues ou enviar sugestões de melhoria. 🚀
