@@ -1,9 +1,9 @@
 # **Modelo Preditivo para Moderação de Conteúdo: Identificação de Claims e Opiniões em Vídeos do TikTok**
 
 ### **Integrantes do Grupo**
-- **Gabriella de Lima Araujo** - 2022104786  
-- **Victoria Andrade Flores de Mello** - 2023002251  
-- **Haniel Botelho Ribeiro** - 2023028552  
+- **Gabriella de Lima Araujo**  
+- **Victoria Andrade Flores de Mello** 
+- **Haniel Botelho Ribeiro**  
 
 ---
 
